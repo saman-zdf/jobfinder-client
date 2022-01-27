@@ -1,12 +1,12 @@
 import main from '../assets/images/main.svg';
-import logo from '../assets/images/logo.svg';
 import Wrapper from '../assets/wrappers/LandingPage';
+import { Logo } from '../components/index';
 const Landing = () => {
   return (
     <>
       <Wrapper>
         <nav>
-          <img src={logo} alt='Jobify' className='logo' />
+          <Logo />
         </nav>
         <div className='container page'>
           {/* Info */}
@@ -16,8 +16,8 @@ const Landing = () => {
             </h1>
             <p>
               In this application you can create job or show your interest to
-              other's jobs. This is a prototype application that can help user
-              to find their dream job. Easy to use and also with a lot
+              other's jobs. This is a prototype application that can help users
+              to find their dream jobs. Easy to use and also with a lot
               informations.
             </p>
             <button className='btn btn-hero'>Login/Register</button>
