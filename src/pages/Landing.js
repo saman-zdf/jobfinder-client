@@ -1,10 +1,10 @@
 import main from '../assets/images/main.svg';
 import logo from '../assets/images/logo.svg';
-
+import Wrapper from '../assets/wrappers/LandingPage';
 const Landing = () => {
   return (
     <>
-      <main>
+      <Wrapper>
         <nav>
           <img src={logo} alt='Jobify' className='logo' />
         </nav>
@@ -22,9 +22,11 @@ const Landing = () => {
             </p>
             <button className='btn btn-hero'>Login/Register</button>
           </div>
-          <img src={main} alt='Job Hunt' className='img main-img' />
+          <div>
+            <img src={main} alt='Job Hunt' className='img main-img' />
+          </div>
         </div>
-      </main>
+      </Wrapper>
     </>
   );
 };
