@@ -1,6 +1,2 @@
-export const initialState = {
-  isLoading: false,
-  showAlert: false,
-  alertText: '',
-  alertType: '',
-};
+export const DISPLAY_ALERT = 'SHOW_ALERT';
+export const CLEAR_ALERT = 'CLEAR_ALERT';
