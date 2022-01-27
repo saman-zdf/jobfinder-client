@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import main from '../assets/images/main.svg';
 import Wrapper from '../assets/wrappers/LandingPage';
 import { Logo } from '../components/index';
@@ -20,7 +21,9 @@ const Landing = () => {
               to find their dream jobs. Easy to use and also with a lot
               informations.
             </p>
-            <button className='btn btn-hero'>Login/Register</button>
+            <Link to='/register' className='btn btn-hero'>
+              Login/Register
+            </Link>
           </div>
           <div>
             <img src={main} alt='Job Hunt' className='img main-img' />
