@@ -6,6 +6,8 @@ import {
   SETUP_USER_BEGIN,
   SETUP_USER_SUCCESS,
   SETUP_USER_ERROR,
+  TOGGLE_SIDEBAR,
+  LOGOUT_USER,
 } from './action';
 import { reducer } from './reducer';
 
@@ -22,6 +24,7 @@ const initialState = {
   showAlert: false,
   alertText: '',
   alertType: '',
+  showSidebar: false,
 };
 
 const AppContext = React.createContext();
@@ -77,8 +80,26 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
+  // sidebar
+  const toggleSidebar = () => {
+    dispatch({ type: TOGGLE_SIDEBAR });
+  };
+  const logoutUser = () => {
+    dispatch({ type: LOGOUT_USER });
+    removeUserFromLocalStorage();
+  };
+
   return (
-    <AppContext.Provider value={{ ...state, displayAlert, setupUser }}>
+    <AppContext.Provider
+      value={{
+        ...state,
+        displayAlert,
+        setupUser,
+        toggleSidebar,
+        removeUserFromLocalStorage,
+        logoutUser,
+      }}
+    >
       {/* The children is our application and this is what we rendering */}
       {children}
     </AppContext.Provider>
