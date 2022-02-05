@@ -59,7 +59,7 @@ const AppProvider = ({ children }) => {
     (err) => {
       console.log(err.response);
       if (err.response.status === 401) {
-        console.log('AUTH ERROR');
+        logoutUser();
       }
       return Promise.reject(err);
     }
@@ -112,7 +112,7 @@ const AppProvider = ({ children }) => {
     }
     clearAlert();
   };
-  // update user
+  // update user function
   const updateUser = async (currentUser) => {
     dispatch({ type: UPDATE_USER_BEGIN });
     try {
@@ -130,7 +130,9 @@ const AppProvider = ({ children }) => {
           data: { msg },
         },
       } = error;
-      dispatch({ type: UPDATE_USER_ERROR, payload: { msg: msg } });
+      if (error.response.status !== 401) {
+        dispatch({ type: UPDATE_USER_ERROR, payload: { msg: msg } });
+      }
     }
     clearAlert();
   };
