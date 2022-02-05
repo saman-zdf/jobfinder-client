@@ -32,6 +32,36 @@ const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  // axios
+  // axios.defaults.headers.common['Authorization'] = `Bearer ${state.token}`;
+
+  const authFetch = axios.create({
+    baseURL: '/api/v1',
+  });
+  // request
+  authFetch.interceptors.request.use(
+    (config) => {
+      config.headers.common['Authorization'] = `Bearer ${state.token}`;
+      return config;
+    },
+    (err) => {
+      return Promise.reject(err);
+    }
+  );
+  // response
+  authFetch.interceptors.response.use(
+    (res) => {
+      return res;
+    },
+    (err) => {
+      console.log(err.response);
+      if (err.response.status === 401) {
+        console.log('AUTH ERROR');
+      }
+      return Promise.reject(err);
+    }
+  );
+
   const displayAlert = () => {
     dispatch({ type: DISPLAY_ALERT });
     clearAlert();
@@ -80,8 +110,13 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
   // update user
-  const updateUser = (currentUser) => {
-    console.log(currentUser);
+  const updateUser = async (currentUser) => {
+    try {
+      const { data } = await authFetch.patch('/auth/updateUser', currentUser);
+      console.log(data);
+    } catch (error) {
+      console.log(error.response);
+    }
   };
   // sidebar
   const toggleSidebar = () => {
