@@ -79,7 +79,10 @@ const AppProvider = ({ children }) => {
     }
     clearAlert();
   };
-
+  // update user
+  const updateUser = (currentUser) => {
+    console.log(currentUser);
+  };
   // sidebar
   const toggleSidebar = () => {
     dispatch({ type: TOGGLE_SIDEBAR });
@@ -98,6 +101,7 @@ const AppProvider = ({ children }) => {
         toggleSidebar,
         removeUserFromLocalStorage,
         logoutUser,
+        updateUser,
       }}
     >
       {/* The children is our application and this is what we rendering */}

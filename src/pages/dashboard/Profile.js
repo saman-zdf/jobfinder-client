@@ -1,7 +1,62 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useAppContext } from '../../context/appContext';
+import Wrapper from '../../assets/wrappers/DashboardFormPage';
+import { FormRow, Alert } from '../../components';
 
 const Profile = () => {
-  return <h1>Profile Page</h1>;
+  const { updateUser, user, showAlert, displayAlert, isLoading } =
+    useAppContext();
+  const [name, setName] = useState(user?.name);
+  const [email, setEmail] = useState(user?.email);
+  const [location, setLocation] = useState(user?.location);
+  const [lastName, setLastName] = useState(user?.lastName);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // remove while testing
+    if (!name || !lastName || !email || !location) {
+      displayAlert();
+      return;
+    }
+    updateUser({ name, email, lastName, location });
+  };
+  return (
+    <Wrapper>
+      <form className='form' onSubmit={handleSubmit}>
+        <h3>Profile</h3>
+        {showAlert && <Alert />}
+        <div className='form-center'>
+          <FormRow
+            type='text'
+            name='name'
+            value={name}
+            handleChange={(e) => setName(e.target.value)}
+          />
+          <FormRow
+            type='text'
+            name='lastName'
+            labelText='Last Name'
+            value={lastName}
+            handleChange={(e) => setLastName(e.target.value)}
+          />
+          <FormRow
+            type='email'
+            name='email'
+            value={email}
+            handleChange={(e) => setEmail(e.target.value)}
+          />
+          <FormRow
+            type='text'
+            name='location'
+            value={location}
+            handleChange={(e) => setLocation(e.target.value)}
+          />
+          <button type='submit' className='btn bnt-block' disabled={isLoading}>
+            {isLoading ? 'Please wait...' : 'Save Changes'}
+          </button>
+        </div>
+      </form>
+    </Wrapper>
+  );
 };
 
 export default Profile;
