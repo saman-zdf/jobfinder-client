@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FormRow, Alert } from '../../components';
+import { FormRow, Alert, FormRowSelect } from '../../components';
 import { useAppContext } from '../../context/appContext';
 import Wrapper from '../../assets/wrappers/DashboardFormPage';
 
@@ -60,26 +60,21 @@ const AddJob = () => {
             handleChange={handleJobInput}
           />
           {/* job type */}
-          <div className='form-row'>
-            <label htmlFor='jobType' className='form-label'>
-              Job Type
-            </label>
-            <select
-              name='jobType'
-              value={jobType}
-              onChange={handleJobInput}
-              className='form-select'
-            >
-              {jobTypeOptions.map((item, index) => {
-                return (
-                  <option key={index} value={item}>
-                    {item}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
+          <FormRowSelect
+            list={jobTypeOptions}
+            value={jobType}
+            handleChange={handleJobInput}
+            name='jobType'
+            labelText='Job Type'
+          />
           {/* job status */}
+          <FormRowSelect
+            name='status'
+            value={status}
+            handleChange={handleJobInput}
+            list={statusOptions}
+          />
+          {/* btn container */}
           <div className='btn-container'>
             <button
               type='submit'
