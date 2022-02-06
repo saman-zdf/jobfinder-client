@@ -12,6 +12,7 @@ import {
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
   HANDLE_CHANGE,
+  CLEAR_VALUES,
 } from './action';
 import { reducer } from './reducer';
 
@@ -159,6 +160,11 @@ const AppProvider = ({ children }) => {
     dispatch({ type: HANDLE_CHANGE, payload: { name, value } });
   };
 
+  // clear inputs
+  const clearInputs = () => {
+    dispatch({ type: CLEAR_VALUES });
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -170,6 +176,7 @@ const AppProvider = ({ children }) => {
         logoutUser,
         updateUser,
         handleChange,
+        clearInputs,
       }}
     >
       {/* The children is our application and this is what we rendering */}
