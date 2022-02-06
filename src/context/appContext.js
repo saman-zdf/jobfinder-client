@@ -11,6 +11,7 @@ import {
   UPDATE_USER_BEGIN,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
+  HANDLE_CHANGE,
 } from './action';
 import { reducer } from './reducer';
 
@@ -153,6 +154,11 @@ const AppProvider = ({ children }) => {
     removeUserFromLocalStorage();
   };
 
+  // handle Change
+  const handleChange = ({ name, value }) => {
+    dispatch({ type: HANDLE_CHANGE, payload: { name, value } });
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -163,6 +169,7 @@ const AppProvider = ({ children }) => {
         removeUserFromLocalStorage,
         logoutUser,
         updateUser,
+        handleChange,
       }}
     >
       {/* The children is our application and this is what we rendering */}
