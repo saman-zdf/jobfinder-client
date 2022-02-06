@@ -13,6 +13,9 @@ import {
   UPDATE_USER_ERROR,
   HANDLE_CHANGE,
   CLEAR_VALUES,
+  CREATE_JOB_BEGIN,
+  CREATE_JOB_SUCCESS,
+  CREATE_JOB_ERROR,
 } from './action';
 import { reducer } from './reducer';
 
@@ -88,8 +91,8 @@ const AppProvider = ({ children }) => {
   // add user to local storage
   const addUserToLocalStorage = ({ user, token, location }) => {
     localStorage.setItem('user', JSON.stringify(user));
-    localStorage.setItem('token', JSON.stringify(token));
-    localStorage.setItem('location', JSON.stringify(location));
+    localStorage.setItem('token', token);
+    localStorage.setItem('location', location);
   };
 
   // remove user from localStorage
@@ -146,6 +149,7 @@ const AppProvider = ({ children }) => {
     }
     clearAlert();
   };
+
   // sidebar
   const toggleSidebar = () => {
     dispatch({ type: TOGGLE_SIDEBAR });
@@ -165,6 +169,32 @@ const AppProvider = ({ children }) => {
     dispatch({ type: CLEAR_VALUES });
   };
 
+  // create job func
+  const createJob = async () => {
+    dispatch({ type: CREATE_JOB_BEGIN });
+    try {
+      const { position, company, jobLocation, status, jobType } = state;
+      await authFetch.post('/job', {
+        position,
+        company,
+        jobLocation,
+        jobType,
+        status,
+      });
+      dispatch({ type: CREATE_JOB_SUCCESS });
+      dispatch({ type: CLEAR_VALUES });
+    } catch (error) {
+      const {
+        response: {
+          data: { msg },
+        },
+      } = error;
+      if (error.response.status === 401) return;
+      dispatch({ type: CREATE_JOB_ERROR, payload: { msg: msg } });
+    }
+    clearAlert();
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -177,6 +207,7 @@ const AppProvider = ({ children }) => {
         updateUser,
         handleChange,
         clearInputs,
+        createJob,
       }}
     >
       {/* The children is our application and this is what we rendering */}
