@@ -219,6 +219,16 @@ const AppProvider = ({ children }) => {
     clearAlert();
   };
 
+  // edit job func
+  const setEditJob = (id) => {
+    console.log(`set edit job ${id}`);
+  };
+
+  // delete job func
+  const setDeleteJob = (id) => {
+    console.log(`set delete job ${id}`);
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -233,6 +243,8 @@ const AppProvider = ({ children }) => {
         clearInputs,
         createJob,
         getJobs,
+        setDeleteJob,
+        setEditJob,
       }}
     >
       {/* The children is our application and this is what we rendering */}
