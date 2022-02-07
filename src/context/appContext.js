@@ -18,6 +18,7 @@ import {
   CREATE_JOB_ERROR,
   GET_JOBS_BEGIN,
   GET_JOBS_SUCCESS,
+  SET_EDIT_JOB,
 } from './action';
 import { reducer } from './reducer';
 
@@ -34,7 +35,7 @@ const initialState = {
   alertText: '',
   alertType: '',
   showSidebar: false,
-  idEditing: false,
+  isEditing: false,
   editJobId: '',
   position: '',
   company: '',
@@ -221,7 +222,11 @@ const AppProvider = ({ children }) => {
 
   // edit job func
   const setEditJob = (id) => {
-    console.log(`set edit job ${id}`);
+    dispatch({ type: SET_EDIT_JOB, payload: { id } });
+  };
+
+  const editJob = () => {
+    console.log('Edit job');
   };
 
   // delete job func
@@ -245,6 +250,7 @@ const AppProvider = ({ children }) => {
         getJobs,
         setDeleteJob,
         setEditJob,
+        editJob,
       }}
     >
       {/* The children is our application and this is what we rendering */}
