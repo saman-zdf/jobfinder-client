@@ -276,7 +276,8 @@ const AppProvider = ({ children }) => {
   const showStats = async () => {
     dispatch({ type: SHOW_STATS_BEGIN });
     try {
-      const { data } = authFetch('/job/stats');
+      const { data } = await authFetch.get('/job/stats');
+      console.log(data);
       dispatch({
         type: SHOW_STATS_SUCCESS,
         payload: {
