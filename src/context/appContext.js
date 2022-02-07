@@ -19,6 +19,7 @@ import {
   GET_JOBS_BEGIN,
   GET_JOBS_SUCCESS,
   SET_EDIT_JOB,
+  DELETE_JOB_BEGIN,
 } from './action';
 import { reducer } from './reducer';
 
@@ -230,8 +231,15 @@ const AppProvider = ({ children }) => {
   };
 
   // delete job func
-  const setDeleteJob = (id) => {
-    console.log(`set delete job ${id}`);
+  const setDeleteJob = async (id) => {
+    dispatch({ type: DELETE_JOB_BEGIN });
+    try {
+      await authFetch.delete(`/job/${id}`);
+      getJobs();
+    } catch (error) {
+      console.log(error.response);
+      logoutUser();
+    }
   };
 
   return (
