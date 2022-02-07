@@ -214,6 +214,7 @@ const AppProvider = ({ children }) => {
       });
     } catch (error) {
       console.log(error.response);
+      // logoutUser()
     }
     clearAlert();
   };
@@ -231,6 +232,7 @@ const AppProvider = ({ children }) => {
         handleChange,
         clearInputs,
         createJob,
+        getJobs,
       }}
     >
       {/* The children is our application and this is what we rendering */}
