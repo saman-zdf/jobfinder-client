@@ -56,6 +56,11 @@ const initialState = {
   page: 1,
   stats: {},
   monthlyApplication: [],
+  search: '',
+  searchStatus: 'all',
+  searchType: 'all',
+  sort: 'latest',
+  sortOptions: ['latest', 'oldest', 'a-z', 'z-a'],
 };
 
 const AppContext = React.createContext();
@@ -291,6 +296,11 @@ const AppProvider = ({ children }) => {
     }
   };
 
+  // clear filters
+  const clearFilters = () => {
+    console.log('Clear Filters');
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -309,6 +319,7 @@ const AppProvider = ({ children }) => {
         setEditJob,
         editJob,
         showStats,
+        clearFilters,
       }}
     >
       {/* The children is our application and this is what we rendering */}
