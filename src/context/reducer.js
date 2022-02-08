@@ -23,6 +23,7 @@ import {
   EDIT_JOB_ERROR,
   SHOW_STATS_BEGIN,
   SHOW_STATS_SUCCESS,
+  CLEAR_FILTERS,
 } from './action';
 import { initialState } from './appContext';
 
@@ -233,6 +234,15 @@ export const reducer = (state, action) => {
       isLoading: false,
       stats: action.payload.stats,
       monthlyApplication: action.payload.monthlyApplication,
+    };
+  }
+  if (action.type === CLEAR_FILTERS) {
+    return {
+      ...state,
+      search: '',
+      searchStatus: 'all',
+      searchType: 'all',
+      sort: 'latest',
     };
   }
   throw new Error(`No such action: ${action.type}`);

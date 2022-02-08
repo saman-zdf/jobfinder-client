@@ -25,6 +25,7 @@ import {
   EDIT_JOB_ERROR,
   SHOW_STATS_BEGIN,
   SHOW_STATS_SUCCESS,
+  CLEAR_FILTERS,
 } from './action';
 import { reducer } from './reducer';
 
@@ -217,7 +218,11 @@ const AppProvider = ({ children }) => {
 
   // get all jobs
   const getJobs = async () => {
-    let url = '/job';
+    const { searchStatus, searchType, sort, search } = state;
+    let url = `/job?status=${searchStatus}&jobType=${searchType}&sort=${sort}`;
+    if (search) {
+      url += `&search=${search}`;
+    }
     dispatch({ type: GET_JOBS_BEGIN });
     try {
       const { data } = await authFetch.get(url);
@@ -298,7 +303,7 @@ const AppProvider = ({ children }) => {
 
   // clear filters
   const clearFilters = () => {
-    console.log('Clear Filters');
+    dispatch({ type: CLEAR_FILTERS });
   };
 
   return (
