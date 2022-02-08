@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Wrapper from '../assets/wrappers/Navbar';
 import { FaAlignLeft, FaUserCircle, FaCaretDown } from 'react-icons/fa';
 import { useAppContext } from '../context/appContext';
-import { useNavigate } from 'react-router-dom';
 import Logo from './Logo';
 const Navbar = () => {
   const { toggleSidebar, logoutUser, user } = useAppContext();

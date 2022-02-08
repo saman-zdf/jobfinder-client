@@ -5,7 +5,7 @@ import Job from './Job';
 import Wrapper from '../assets/wrappers/JobsContainer';
 
 const JobsContainer = () => {
-  const { getJobs, jobs, totalJobs, isLoading, page } = useAppContext();
+  const { getJobs, jobs, totalJobs, isLoading } = useAppContext();
 
   useEffect(() => {
     getJobs();
