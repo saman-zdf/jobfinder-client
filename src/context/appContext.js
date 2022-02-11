@@ -226,10 +226,10 @@ const AppProvider = ({ children }) => {
     dispatch({ type: GET_JOBS_BEGIN });
     try {
       const { data } = await authFetch.get(url);
-      const { jobs, totalJobs, numOfPages } = data;
+      const { jobs, totalJobs, numOfPage } = data;
       dispatch({
         type: GET_JOBS_SUCCESS,
-        payload: { jobs, totalJobs, numOfPages },
+        payload: { jobs, totalJobs, numOfPage },
       });
     } catch (error) {
       console.log(error.response);

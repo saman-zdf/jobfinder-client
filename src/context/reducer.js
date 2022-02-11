@@ -174,7 +174,7 @@ export const reducer = (state, action) => {
       showAlert: true,
       jobs: action.payload.jobs,
       totalJobs: action.payload.totalJobs,
-      numOfPages: action.payload.numOfPages,
+      numOfPages: action.payload.numOfPage,
     };
   }
   if (action.type === SET_EDIT_JOB) {

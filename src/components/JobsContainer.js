@@ -3,6 +3,7 @@ import { useAppContext } from '../context/appContext';
 import Loading from './Loading.js';
 import Job from './Job';
 import Wrapper from '../assets/wrappers/JobsContainer';
+import PageBtnContainer from './PageBtnContainer';
 
 const JobsContainer = () => {
   const {
@@ -14,7 +15,7 @@ const JobsContainer = () => {
     sort,
     searchType,
     searchStatus,
-    page,
+    numOfPages,
   } = useAppContext();
 
   useEffect(() => {
@@ -40,6 +41,8 @@ const JobsContainer = () => {
           return <Job key={job._id} {...job} />;
         })}
       </div>
+      {numOfPages > 1 && <PageBtnContainer />}
+
       {/* pagination buttons */}
     </Wrapper>
   );
