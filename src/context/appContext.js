@@ -26,6 +26,7 @@ import {
   SHOW_STATS_BEGIN,
   SHOW_STATS_SUCCESS,
   CLEAR_FILTERS,
+  CHANGE_PAGE,
 } from './action';
 import { reducer } from './reducer';
 
@@ -218,8 +219,8 @@ const AppProvider = ({ children }) => {
 
   // get all jobs
   const getJobs = async () => {
-    const { searchStatus, searchType, sort, search } = state;
-    let url = `/job?status=${searchStatus}&jobType=${searchType}&sort=${sort}`;
+    const { searchStatus, searchType, sort, search, page } = state;
+    let url = `/job?page=${page}&status=${searchStatus}&jobType=${searchType}&sort=${sort}`;
     if (search) {
       url += `&search=${search}`;
     }
@@ -241,6 +242,11 @@ const AppProvider = ({ children }) => {
   // edit job func
   const setEditJob = (id) => {
     dispatch({ type: SET_EDIT_JOB, payload: { id } });
+  };
+
+  // change page function
+  const changePage = (page) => {
+    dispatch({ type: CHANGE_PAGE, payload: { page } });
   };
 
   const editJob = async () => {
@@ -325,6 +331,7 @@ const AppProvider = ({ children }) => {
         editJob,
         showStats,
         clearFilters,
+        changePage,
       }}
     >
       {/* The children is our application and this is what we rendering */}

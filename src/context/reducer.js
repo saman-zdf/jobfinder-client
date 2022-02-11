@@ -24,6 +24,7 @@ import {
   SHOW_STATS_BEGIN,
   SHOW_STATS_SUCCESS,
   CLEAR_FILTERS,
+  CHANGE_PAGE,
 } from './action';
 import { initialState } from './appContext';
 
@@ -118,6 +119,7 @@ export const reducer = (state, action) => {
   if (action.type === HANDLE_CHANGE) {
     return {
       ...state,
+      page: 1,
       [action.payload.name]: action.payload.value,
     };
   }
@@ -243,6 +245,12 @@ export const reducer = (state, action) => {
       searchStatus: 'all',
       searchType: 'all',
       sort: 'latest',
+    };
+  }
+  if (action.type === CHANGE_PAGE) {
+    return {
+      ...state,
+      page: action.payload.page,
     };
   }
   throw new Error(`No such action: ${action.type}`);

@@ -16,11 +16,12 @@ const JobsContainer = () => {
     searchType,
     searchStatus,
     numOfPages,
+    page,
   } = useAppContext();
 
   useEffect(() => {
     getJobs();
-  }, [search, sort, searchType, searchStatus]);
+  }, [search, sort, searchType, searchStatus, page]);
   if (isLoading) {
     return <Loading center />;
   }
